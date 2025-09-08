@@ -1,36 +1,36 @@
 import { useReducer, useState } from "react";
-// import Search from "./components/Search";
-// import RecipeList from "./components/RecipeList";
-// import Nav from "./components/Nav";
-// import "./App.css";
-// import Container from "./components/Container";
-// import InnerContainer from "./components/InnerContainer";
-// import RecipeDetail from "./components/RecipeDetail";
+import Search from "./components/Search";
+import RecipeList from "./components/RecipeList";
+import Nav from "./components/Nav";
+import "./App.css";
+import Container from "./components/Container";
+import InnerContainer from "./components/InnerContainer";
+import RecipeDetail from "./components/RecipeDetail";
 
-// function App() {
-//   const [recipeData, setRecipeData] = useState([]);
-//   const [recipeId, setRecipeId] = useState("");
-//   return (
-//     <div className="App">
-//       <Nav />
-//       <Search recipeData={recipeData} setRecipeData={setRecipeData} />
+function App() {
+  const [recipeData, setRecipeData] = useState([]);
+  const [recipeId, setRecipeId] = useState("");
+  return (
+    <div className="App">
+      <Nav />
+      <Search recipeData={recipeData} setRecipeData={setRecipeData} />
 
-//       {/*👇🏼 Structural Component && Also It is Nesting Component [Parent(child)]*/}
+      {/*👇🏼 Structural Component && Also It is Nesting Component [Parent(child)]*/}
 
-//       <Container>
-//         <InnerContainer>
-//           {/*👇🏼 It goes like "export default function Container({ RecipeList }) {}" */}
-//           <RecipeList setRecipeId={setRecipeId} recipeData={recipeData} />
-//         </InnerContainer>
-//         <InnerContainer>
-//           <RecipeDetail recipeId={recipeId} />
-//         </InnerContainer>
-//       </Container>
-//     </div>
-//   );
-// }
-//
-// export default App;
+      <Container>
+        <InnerContainer>
+          {/*👇🏼 It goes like "export default function Container({ RecipeList }) {}" */}
+          <RecipeList setRecipeId={setRecipeId} recipeData={recipeData} />
+        </InnerContainer>
+        <InnerContainer>
+          <RecipeDetail recipeId={recipeId} />
+        </InnerContainer>
+      </Container>
+    </div>
+  );
+}
+
+export default App;
 
 /*---------------------------------------For Understanding of useReducer Function----------------------------------------*/
 
@@ -89,38 +89,3 @@ import { useReducer, useState } from "react";
 // }
 
 // export default App;
-
-/*---------------------------For Understanding of useReducer Function : BankAccount Example-------------------------------*/
-
-function App() {
-  const [state, dispatch] = useReducer(reducer, { balance: 0, amount: 1 });
-
-  function reducer(state, action) {
-    if (action.type == "deposit") {
-      return { ...state, balance: state.balance + state.amount };
-    }
-    if (action.type == "withdraw") {
-      return { ...state, balance: state.balance - state.amount };
-    }
-    if (action.type == "setBalance") {
-      return { ...state, amount: action.payload };
-    }
-  }
-
-  return (
-    <div>
-      {state.balance}
-      <input
-        onChange={(e) =>
-          dispatch({ type: "setBalance", payload: Number(e.target.value) })
-        }
-        type="text"
-        placeholder="Enter value"
-      />
-      <button onClick={() => dispatch({ type: "deposit" })}>Deposit</button>
-      <button onClick={() => dispatch({ type: "withdraw" })}>Withdraw</button>
-    </div>
-  );
-}
-
-export default App;
