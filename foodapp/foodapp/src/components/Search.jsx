@@ -3,7 +3,7 @@ import styles from "./search.module.css";
 
 const URL = "https://api.spoonacular.com/recipes/complexSearch";
 //In Real-World Application(In case of deploy), You should declare APIKEY in Environment Variables.
-const API_KEY = "d16cc78f892d4e07a79d936a6df880c1";
+const API_KEY = import.meta.env.VITE_SPOONACULAR_API_KEY;
 
 export default function Search({ recipeData, setRecipeData }) {
   const [inputVal, setInputVal] = useState("");
@@ -12,13 +12,12 @@ export default function Search({ recipeData, setRecipeData }) {
   useEffect(() => {
     if (!query) return;
 
-    console.log(query);
+    console.log("query : ", query);
 
     async function fetchFood() {
       //Dynamic String (${URL},etc) passing to built-in function fetch
       const res = await fetch(`${URL}?query=${query}&apiKey=${API_KEY}`);
       const data = await res.json();
-      console.log(data.results);
       setRecipeData(data.results);
     }
 
